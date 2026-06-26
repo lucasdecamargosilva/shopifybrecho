@@ -1102,24 +1102,23 @@
         // Posiciona acima do botão de compra, herdando o MESMO design/tamanho do tema
         const buyBtn = document.querySelector('.js-addtocart, .btn-add-to-cart, [data-component="product.add-to-cart"], button[name="add"], .product-form__submit');
         if (buyBtn) {
-            if (buyBtn.className) {
-                inlineBtn.className = buyBtn.className;        // herda forma/tamanho do botão de compra
-                inlineBtn.classList.add('q-provador-trigger');
-            }
-            // mesmo tamanho do botão de compra, porém SEM fundo (outline na cor do tema)
+            // NÃO herda as classes do tema (elas pintam o verde via CSS/pseudo-elemento ::before).
+            // Replica só o TAMANHO do botão de compra, com fundo branco e texto preto.
+            inlineBtn.className = 'q-provador-trigger';
             var _cs = getComputedStyle(buyBtn);
-            var _accent = (_cs.backgroundColor && _cs.backgroundColor !== 'rgba(0, 0, 0, 0)' && _cs.backgroundColor !== 'transparent') ? _cs.backgroundColor : (_cs.color || '#111');
-            inlineBtn.style.background = 'transparent';
-            inlineBtn.style.backgroundColor = 'transparent';
-            inlineBtn.style.backgroundImage = 'none';
-            inlineBtn.style.color = _accent;
-            inlineBtn.style.border = '1.5px solid ' + _accent;
-            inlineBtn.style.boxShadow = 'none';
-            inlineBtn.style.display = 'flex';
-            inlineBtn.style.alignItems = 'center';
-            inlineBtn.style.justifyContent = 'center';
-            inlineBtn.style.gap = '8px';
-            inlineBtn.style.marginBottom = '10px';
+            var _h = buyBtn.offsetHeight || 48;
+            inlineBtn.style.cssText = [
+                'display:flex', 'align-items:center', 'justify-content:center', 'gap:8px',
+                'width:100%', 'box-sizing:border-box', 'height:' + _h + 'px',
+                'background:#fff', 'color:#000', 'border:1.5px solid #111',
+                'border-radius:' + _cs.borderRadius,
+                'font-family:' + _cs.fontFamily,
+                'font-size:' + _cs.fontSize,
+                'font-weight:' + _cs.fontWeight,
+                'letter-spacing:' + _cs.letterSpacing,
+                'text-transform:' + _cs.textTransform,
+                'cursor:pointer', 'margin:0 0 10px 0', 'line-height:normal', 'padding:0 16px'
+            ].join(';');
             buyBtn.parentNode.insertBefore(inlineBtn, buyBtn);
         } else {
             const variantsContainer = document.querySelector('.js-product-variants, .product-form__buttons, product-form');
