@@ -1098,13 +1098,13 @@
         });
 
         // Posiciona acima do botão de compra
-        const buyBtn = document.querySelector('.js-addtocart, .btn-add-to-cart, [data-component="product.add-to-cart"]');
+        const buyBtn = document.querySelector('.js-addtocart, .btn-add-to-cart, [data-component="product.add-to-cart"], button[name="add"], .product-form__submit');
         if (buyBtn) {
             buyBtn.parentNode.insertBefore(inlineBtn, buyBtn);
         } else {
-            const variantsContainer = document.querySelector('.js-product-variants');
+            const variantsContainer = document.querySelector('.js-product-variants, .product-form__buttons, product-form');
             if (variantsContainer) {
-                variantsContainer.parentNode.insertBefore(inlineBtn, variantsContainer.nextSibling);
+                variantsContainer.parentNode.insertBefore(inlineBtn, variantsContainer);
             }
         }
         const genBtn      = document.getElementById('q-btn-generate');
