@@ -1097,9 +1097,18 @@
             openModal();
         });
 
-        // Posiciona acima do botão de compra
+        // Posiciona acima do botão de compra, herdando o MESMO design/tamanho do tema
         const buyBtn = document.querySelector('.js-addtocart, .btn-add-to-cart, [data-component="product.add-to-cart"], button[name="add"], .product-form__submit');
         if (buyBtn) {
+            if (buyBtn.className) {
+                inlineBtn.className = buyBtn.className;        // herda visual do botão de compra
+                inlineBtn.classList.add('q-provador-trigger');
+            }
+            inlineBtn.style.display = 'flex';
+            inlineBtn.style.alignItems = 'center';
+            inlineBtn.style.justifyContent = 'center';
+            inlineBtn.style.gap = '8px';
+            inlineBtn.style.marginBottom = '10px';
             buyBtn.parentNode.insertBefore(inlineBtn, buyBtn);
         } else {
             const variantsContainer = document.querySelector('.js-product-variants, .product-form__buttons, product-form');
