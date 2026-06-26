@@ -1070,6 +1070,8 @@
 
         const inlineSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         inlineSvg.setAttribute('viewBox', '0 0 24 24');
+        inlineSvg.setAttribute('width', '18');
+        inlineSvg.setAttribute('height', '18');
         inlineSvg.setAttribute('fill', 'none');
         inlineSvg.setAttribute('stroke', 'currentColor');
         inlineSvg.setAttribute('stroke-width', '1.5');
@@ -1101,9 +1103,18 @@
         const buyBtn = document.querySelector('.js-addtocart, .btn-add-to-cart, [data-component="product.add-to-cart"], button[name="add"], .product-form__submit');
         if (buyBtn) {
             if (buyBtn.className) {
-                inlineBtn.className = buyBtn.className;        // herda visual do botão de compra
+                inlineBtn.className = buyBtn.className;        // herda forma/tamanho do botão de compra
                 inlineBtn.classList.add('q-provador-trigger');
             }
+            // mesmo tamanho do botão de compra, porém SEM fundo (outline na cor do tema)
+            var _cs = getComputedStyle(buyBtn);
+            var _accent = (_cs.backgroundColor && _cs.backgroundColor !== 'rgba(0, 0, 0, 0)' && _cs.backgroundColor !== 'transparent') ? _cs.backgroundColor : (_cs.color || '#111');
+            inlineBtn.style.background = 'transparent';
+            inlineBtn.style.backgroundColor = 'transparent';
+            inlineBtn.style.backgroundImage = 'none';
+            inlineBtn.style.color = _accent;
+            inlineBtn.style.border = '1.5px solid ' + _accent;
+            inlineBtn.style.boxShadow = 'none';
             inlineBtn.style.display = 'flex';
             inlineBtn.style.alignItems = 'center';
             inlineBtn.style.justifyContent = 'center';
