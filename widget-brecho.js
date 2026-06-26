@@ -694,7 +694,7 @@
                     <!-- Persistent header (all steps) -->
                     <div id="q-header-provador">
                         <h1>Provador Virtual</h1>
-                        <img src="https://brechodooculos.com/cdn/shop/files/logo.jpg?v=1730821147&width=240" alt="Brechó do Óculos" style="height:48px;width:auto;"/>
+                        <img src="https://brechodooculos.com/cdn/shop/files/logo.jpg?v=1730821147&width=400" alt="Brechó do Óculos" style="height:80px;width:auto;"/>
                     </div>
 
                     <!-- Main step -->
