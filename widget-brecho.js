@@ -1102,14 +1102,25 @@
         // Posiciona acima do botão de compra, herdando o MESMO design/tamanho do tema
         const buyBtn = document.querySelector('.js-addtocart, .btn-add-to-cart, [data-component="product.add-to-cart"], button[name="add"], .product-form__submit');
         if (buyBtn) {
-            // Herda as classes do tema (MESMO TAMANHO do botão de compra) e injeta um override
-            // de estilo que mata o fundo verde (inclusive ::before/::after do Dawn) -> fundo branco + texto preto.
+            // Herda as classes do tema (MESMO TAMANHO do botão de compra).
             inlineBtn.className = (buyBtn.className ? buyBtn.className + ' ' : '') + 'q-provador-trigger';
+            // Inline + !important: maior prioridade do CSS -> vence qualquer regra do tema no elemento.
+            inlineBtn.style.setProperty('background', '#fff', 'important');
+            inlineBtn.style.setProperty('background-color', '#fff', 'important');
+            inlineBtn.style.setProperty('background-image', 'none', 'important');
+            inlineBtn.style.setProperty('color', '#000', 'important');
+            inlineBtn.style.setProperty('border', '1.5px solid #111', 'important');
+            inlineBtn.style.setProperty('box-shadow', 'none', 'important');
+            inlineBtn.style.setProperty('display', 'flex', 'important');
+            inlineBtn.style.setProperty('align-items', 'center', 'important');
+            inlineBtn.style.setProperty('justify-content', 'center', 'important');
+            inlineBtn.style.setProperty('gap', '8px', 'important');
             inlineBtn.style.marginBottom = '10px';
+            // pseudo-elementos do tema (não dá inline) -> <style> com especificidade dobrada
             if (!document.getElementById('q-provador-btn-style')) {
                 var _st = document.createElement('style');
                 _st.id = 'q-provador-btn-style';
-                _st.textContent = '.q-provador-trigger{background:#fff !important;background-color:#fff !important;background-image:none !important;color:#000 !important;border:1.5px solid #111 !important;box-shadow:none !important;display:flex !important;align-items:center;justify-content:center;gap:8px;}.q-provador-trigger::before,.q-provador-trigger::after{display:none !important;background:none !important;box-shadow:none !important;content:none !important;}.q-provador-trigger svg{width:18px;height:18px;flex:0 0 auto;}';
+                _st.textContent = '.q-provador-trigger.q-provador-trigger::before,.q-provador-trigger.q-provador-trigger::after{background:none !important;background-color:transparent !important;background-image:none !important;box-shadow:none !important;border:0 !important;opacity:0 !important;content:none !important;}.q-provador-trigger svg{width:18px !important;height:18px !important;flex:0 0 auto;}';
                 document.head.appendChild(_st);
             }
             buyBtn.parentNode.insertBefore(inlineBtn, buyBtn);
